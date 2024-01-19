@@ -5,10 +5,12 @@ locals {
 }
 
 locals {
-  temp_folder    = "lambdalayer-nodejs"
-  package_source = "${local.temp_folder}\\${var.library_name}\\nodejs"
+  temp_folder    = "lambdalayer"
   package_file   = "${local.temp_folder}\\nodejs-${var.library_name}.zip"
-  metadata_file  = "${local.package_source}\\package.json"
+
+  package_source = "${local.temp_folder}\\${var.library_name}"
+  project_folder = "${local.package_source}\\nodejs"
+  metadata_file  = "${local.project_folder}\\package.json"
 }
 
 # create folders and a dummy file
@@ -50,7 +52,7 @@ resource "null_resource" "install_nodejs_library" {
 
   # install Node.js library
   provisioner "local-exec" {
-    command = "cd ${local.package_source} && npm install ${var.library_name}"
+    command = "cd ${local.project_folder} && npm install ${var.library_name}"
   }
 }
 

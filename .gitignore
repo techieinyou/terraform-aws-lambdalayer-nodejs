@@ -35,4 +35,4 @@ override.tf.json
 *.zip
 
 # folder created for packaging
-/lambdalayer-nodejs
+/lambdalayer
